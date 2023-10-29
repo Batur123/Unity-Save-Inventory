@@ -5,15 +5,15 @@ public abstract class SaveableObject {
         return JsonUtility.ToJson(this);
     }
 
-    public void Save() {
+    public void Save(string saveName) {
         string data = this.GetJson();
-        string filePath = $"{Application.persistentDataPath}/playerDat.json";
+        string filePath = $"{Application.persistentDataPath}/{saveName}.json";
         Debug.Log($"{this.GetType().Name} has been saved -> {filePath}");
         System.IO.File.WriteAllText(filePath, data);
     }
 
-    public T Load<T>() {
-        string filePath = $"{Application.persistentDataPath}/playerDat.json";
+    public T Load<T>(string saveName) {
+        string filePath = $"{Application.persistentDataPath}/{saveName}.json";
         Debug.Log($"{this.GetType().Name} is loaded -> {filePath}");
         string playerData = System.IO.File.ReadAllText(filePath);
         Debug.Log($"{playerData}");
